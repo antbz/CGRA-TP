@@ -24,6 +24,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quadCube = new MyUnitCubeQuad(this);
+        this.tangram = new MyTangram(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -44,7 +45,9 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.scaleFactor = 5;
+        this.scaleFactor = 2;
+        this.displayCube = false;
+        this.displayTangram = true;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
@@ -122,7 +125,11 @@ class MyScene extends CGFscene {
         
         //this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quadCube.display();
+        if(this.displayCube)
+            this.quadCube.display();
+
+        if(this.displayTangram)
+            this.tangram.display();
 
         // ---- END Primitive drawing section
     }
