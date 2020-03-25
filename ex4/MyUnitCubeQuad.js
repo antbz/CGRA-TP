@@ -52,7 +52,8 @@ class MyUnitCubeQuad extends CGFobject {
     }
     display(){
         
-   
+   	this.scene.pushMatrix();
+	this.scene.translate(0,0,0.5);
 
    
         this.sideMaterial.apply(); //front
@@ -119,7 +120,7 @@ class MyUnitCubeQuad extends CGFobject {
 
 
         
-        this.scene.pushMatrix();
+        this.scene.popMatrix();
 
  
 
