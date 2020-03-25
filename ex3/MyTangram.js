@@ -126,6 +126,30 @@ class MyTangram extends CGFobject {
         this.scene.rotate(-Math.PI * 1/2, 0, 0, 1);
         this.triangle.display();
         this.scene.popMatrix();
-	}
+    }
+    enableNormalViz(){
+        this.diamond.enableNormalViz();
+        this.triangle.enableNormalViz();
+        this.smalltriangle1.enableNormalViz();
+        this.smalltriangle2.enableNormalViz();
+        this.bigtriangle1.enableNormalViz();
+        this.bigtriangle2.enableNormalViz();
+        this.paralellogram.enableNormalViz();
+        
+    }
+    disableNormalViz(){
+        this.diamond.disableNormalViz();
+        this.triangle.disableNormalViz();
+        this.smalltriangle1.disableNormalViz();
+        this.smalltriangle2.disableNormalViz();
+        this.bigtriangle1.disableNormalViz();
+        this.bigtriangle2.disableNormalViz();
+        this.paralellogram.disableNormalViz();
+        
+    }
+
+
+
+
 }
 
