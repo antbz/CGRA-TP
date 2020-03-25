@@ -69,6 +69,8 @@ class MyPyramid extends CGFobject {
         this.initBuffers();
         this.initNormalVizBuffers();
     }
+
+    
 }
 
 

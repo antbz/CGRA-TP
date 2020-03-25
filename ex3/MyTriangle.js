@@ -32,4 +32,6 @@ class MyTriangle extends CGFobject {
 
 		this.initGLBuffers();
 	}
+
+	
 }

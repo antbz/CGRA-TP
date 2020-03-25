@@ -1,4 +1,3 @@
-
 attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec2 aTextureCoord;
@@ -22,4 +21,3 @@ void main() {
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 }
-
