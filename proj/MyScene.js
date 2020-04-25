@@ -97,15 +97,22 @@ class MyScene extends CGFscene {
             this.vehicle.reset();
             keysPressed = true;
         }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text += " P ";
+            this.vehicle.autoPilotToggle();
+            keysPressed = true;
+        }
         if (keysPressed) {
             console.log(text);
+        } else if (!this.vehicle.autoPilot) {
+            this.vehicle.turn(0);
         }
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         //To be done...
         this.checkKeys();
-        this.vehicle.update();
+        this.vehicle.update(t);
     }
 
     display() {
@@ -120,18 +127,14 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         
         // Draw axis
-        if (this.displayAxis)
+        if (this.displayAxis) {
             this.axis.display();
+        }
 
+        this.setDefaultAppearance();
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
-        
-
-        // this.material.setTexture(this.textures[this.textureList['Earth']]);
-        // this.material.apply();
-        // this.incompleteSphere.display();
         
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
