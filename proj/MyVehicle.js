@@ -118,14 +118,9 @@ class MyVehicle extends CGFobject {
     }
 
     autoPilotToggle() { 
-        if (this.autoPilot) {
-            this.autoPilot = false;
-            this.autoPilotTime = -1;
-        } else {
-            this.autoPilot = true;
-            this.ap_x_coord = this.x_pos + 5 * Math.cos(this.angle);
-            this.ap_z_coord = this.z_pos + 5 * Math.sin(this.angle);
-        }
+        this.autoPilot = true;
+        this.ap_x_coord = this.x_pos + 5 * Math.cos(this.angle);
+        this.ap_z_coord = this.z_pos + 5 * Math.sin(this.angle);
     }
 
     update(t) {
