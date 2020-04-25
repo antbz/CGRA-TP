@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.unitCylinder = new MyCylinder(this, 200);
         this.cubeMap = new MyCubeMap(this);
+        this.vehicle = new MyVehicle(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -89,13 +90,15 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        this.material.setTexture(this.textures[this.textureList['Earth']]);
-        this.material.apply();
-        this.incompleteSphere.display();
+        
 
-        this.pushMatrix();
+        // this.material.setTexture(this.textures[this.textureList['Earth']]);
+        // this.material.apply();
+        // this.incompleteSphere.display();
+        
+        this.vehicle.display();
+
         this.cubeMap.display();
-        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
