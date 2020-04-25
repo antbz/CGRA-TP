@@ -27,6 +27,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.unitCylinder = new MyCylinder(this, 200);
+        this.cubeMap = new MyCubeMap(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -49,6 +50,7 @@ class MyScene extends CGFscene {
 
     }
     initLights() {
+        this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
@@ -87,12 +89,13 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //This sphere does not have defined texture coordinates
-        //this.incompleteSphere.display();
-
         this.material.setTexture(this.textures[this.textureList['Earth']]);
         this.material.apply();
         this.incompleteSphere.display();
+
+        this.pushMatrix();
+        this.cubeMap.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
