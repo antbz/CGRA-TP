@@ -32,6 +32,8 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.speedFactor = 1;
+        this.scaleFactor = 1;
 
         // Textures
         this.textures = [
@@ -66,9 +68,44 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            this.vehicle.accelerate(0.2 * this.speedFactor);
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            this.vehicle.accelerate(-0.2 * this.speedFactor);
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
+            this.vehicle.turn(5);
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
+            this.vehicle.turn(-5);
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " R ";
+            this.vehicle.reset();
+            keysPressed = true;
+        }
+        if (keysPressed) {
+            console.log(text);
+        }
+    }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         //To be done...
+        this.checkKeys();
+        this.vehicle.update();
     }
 
     display() {
@@ -96,7 +133,10 @@ class MyScene extends CGFscene {
         // this.material.apply();
         // this.incompleteSphere.display();
         
+        this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.vehicle.display();
+        this.popMatrix();
 
         this.cubeMap.display();
 
