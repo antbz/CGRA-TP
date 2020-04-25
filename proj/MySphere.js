@@ -30,6 +30,11 @@ class MySphere extends CGFobject {
     var thetaInc = (2 * Math.PI) / this.longDivs;
     var latVertices = this.longDivs + 1;
 
+    var texMapLon = 0;
+    var texMapLonInc = 1 / this.longDivs;
+    var texMapLat = 0;
+    var texMapLatInc = 1 / this.latDivs;
+
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
     for (let latitude = 0; latitude <= this.latDivs; latitude++) {
       var sinPhi = Math.sin(phi);
@@ -37,6 +42,8 @@ class MySphere extends CGFobject {
 
       // in each stack, build all the slices around, starting on longitude 0
       theta = 0;
+      texMapLon = 0;
+      
       for (let longitude = 0; longitude <= this.longDivs; longitude++) {
         //--- Vertices coordinates
         var x = Math.cos(theta) * sinPhi;
@@ -68,8 +75,13 @@ class MySphere extends CGFobject {
         // To be done... 
         // May need some additional code also in the beginning of the function.
         
+        this.texCoords.push(texMapLon, texMapLat);
+
+        texMapLon += texMapLonInc;
       }
       phi += phiInc;
+
+      texMapLat += texMapLatInc;
     }
 
 

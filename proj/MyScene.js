@@ -26,9 +26,27 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
+        this.unitCylinder = new MyCylinder(this, 200);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+
+        // Textures
+        this.textures = [
+            new CGFtexture(this, 'images/earth.jpg')
+        ];
+        this.textureList = {
+            'Earth' : 0
+        };
+
+        // Material
+        this.material = new CGFappearance(this);
+        this.material.setAmbient(0.7,0.7,0.7,1);
+        this.material.setDiffuse(0.9,0.9,0.9,1);
+        this.material.setShininess(10);
+        this.material.loadTexture('images/earth.jpg');
+        this.material.setTextureWrap('REPEAT','REPEAT');
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -70,6 +88,10 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
 
         //This sphere does not have defined texture coordinates
+        //this.incompleteSphere.display();
+
+        this.material.setTexture(this.textures[this.textureList['Earth']]);
+        this.material.apply();
         this.incompleteSphere.display();
 
         // ---- END Primitive drawing section
