@@ -80,22 +80,26 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyW")) {
             text += " W ";
-            this.vehicle.accelerate(0.2 * this.speedFactor);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.accelerate(0.2 * this.speedFactor);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text += " S ";
-            this.vehicle.accelerate(-0.2 * this.speedFactor);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.accelerate(-0.2 * this.speedFactor);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyA")) {
             text += " A ";
-            this.vehicle.turn(5);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.turn(5);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyD")) {
             text += " D ";
-            this.vehicle.turn(-5);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.turn(-5);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyR")) {

@@ -16,6 +16,7 @@ class MyVehicle extends CGFobject {
 
         this.autoPilot = false;
         this.autoPilotTime = -1;
+        this.curr_ang = 0;
 
         this.prevUpdate = 0;
     }
@@ -105,24 +106,9 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
     }
 
-    autoPilotUpdate(t) {
-        if (this.autoPilotTime == -1) {
-            this.autoPilotTime = t;
-        }
-
-        var time = ((t - this.autoPilotTime) % 5000) / 5000.0;
-        var curr_ang = 2 * Math.PI * time;
-
-        this.x_pos = -5 * Math.cos(curr_ang) + this.ap_x_coord;
-        this.z_pos = 5 * Math.sin(curr_ang) + this.ap_z_coord;
-
-        this.angle = curr_ang * 180 / Math.PI;
-    }
-
     autoPilotToggle() { 
         this.autoPilot = true;
-        this.ap_x_coord = this.x_pos + 5 * Math.cos(this.angle);
-        this.ap_z_coord = this.z_pos + 5 * Math.sin(this.angle);
+        this.speed = (2 * Math.PI / 5) * 5;
     }
 
     update(t) {
@@ -133,13 +119,12 @@ class MyVehicle extends CGFobject {
         this.prevUpdate = t;
 
         if (this.autoPilot) {
-            t = t
-            this.autoPilotUpdate(t);
-        } else {        
-            this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-            this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-            this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
-        }
+            this.turn(2 * Math.PI * (elapsed / 5000.0) * 180 / Math.PI);
+        }        
+        
+        this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+        this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+        this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
     }
 
     turn(val) {
