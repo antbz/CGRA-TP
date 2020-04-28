@@ -34,6 +34,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.speedFactor = 1;
         this.scaleFactor = 1;
+        this.landscapeTexture = 0;
 
         // Textures
         this.textures = [
@@ -41,6 +42,11 @@ class MyScene extends CGFscene {
         ];
         this.textureList = {
             'Earth' : 0
+        };
+        // Landscape textures
+        this.lsTextureList = {
+            'Default' : 0,
+            'Mars' : 1
         };
 
         // Material
@@ -107,6 +113,9 @@ class MyScene extends CGFscene {
         } else if (!this.vehicle.autoPilot) {
             this.vehicle.turn(0);
         }
+    }
+    updateLSTexture() {
+        this.cubeMap.updateTexture();
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){

@@ -38,8 +38,12 @@ class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        //Sliders
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
+        //Selectors
+        this.gui.add(this.scene, 'landscapeTexture', this.scene.lsTextureList).name('Landscape').onChange(this.scene.updateLSTexture.bind(this.scene));
+
 
         this.initKeys(); 
 
