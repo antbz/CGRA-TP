@@ -16,6 +16,8 @@ class MyVehicle extends CGFobject {
 
         this.autoPilot = false;
         this.autoPilotTime = -1;
+
+        this.prevUpdate = 0;
     }
     
     display() {
@@ -124,12 +126,18 @@ class MyVehicle extends CGFobject {
     }
 
     update(t) {
+        if (this.prevUpdate == 0) {
+            this.prevUpdate = t;
+        }
+        var elapsed = t - this.prevUpdate;
+        this.prevUpdate = t;
+
         if (this.autoPilot) {
             t = t
             this.autoPilotUpdate(t);
         } else {        
-            this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180);
-            this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180);
+            this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+            this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
             this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
         }
     }
