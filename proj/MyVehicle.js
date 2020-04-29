@@ -15,8 +15,8 @@ class MyVehicle extends CGFobject {
         this.prop_ang = 0;
 
         this.autoPilot = false;
-        this.autoPilotTime = -1;
-        this.curr_ang = 0;
+        this.x_centre = 0;
+        this.z_centre = 0;
 
         this.prevUpdate = 0;
 
@@ -126,7 +126,9 @@ class MyVehicle extends CGFobject {
 
     autoPilotToggle() { 
         this.autoPilot = true;
-        this.speed = (2 * Math.PI / 5) * 5;
+        var ang = (this.angle + 90) * Math.PI / 180;
+        this.x_centre = this.x_pos + 5*Math.sin(ang);
+        this.z_centre = this.z_pos + 5*Math.cos(ang);
     }
 
     update(t) {
@@ -137,17 +139,21 @@ class MyVehicle extends CGFobject {
         this.prevUpdate = t;
 
         if (this.autoPilot) {
-            this.turn(2 * Math.PI * (elapsed / 5000.0) * 180 / Math.PI);
-        }        
-        
-        this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-        this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-        // TODO melhorar hierarquia entre os objetos
-        this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
+            this.x_pos = -5 * Math.cos(this.angle * Math.PI / 180) + this.x_centre;
+            this.z_pos = 5 * Math.sin(this.angle * Math.PI / 180) + this.z_centre;
+            this.turn(360 * elapsed / 5000.0);
+            this.prop_ang = (this.prop_ang + 20) % (Math.PI * 2);
+        } else {      
+            this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+            this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+            // TODO melhorar hierarquia entre os objetos
+            this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
+        }
     }
 
     turn(val) {
         this.angle += val;
+        this.angle %= 360;
         this.fin_dir = -val*3 * Math.PI / 180;
     }
 
