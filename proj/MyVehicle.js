@@ -19,6 +19,20 @@ class MyVehicle extends CGFobject {
         this.curr_ang = 0;
 
         this.prevUpdate = 0;
+
+        this.baloon = new CGFappearance(this.scene);
+        this.baloon.setAmbient(0.7,0.7,0.7,1);
+        this.baloon.setDiffuse(0.9,0.9,0.9,1);
+        this.baloon.setShininess(10);
+        this.baloon.loadTexture('images/blimp/avante.jpg');
+        this.baloon.setTextureWrap('REPEAT','REPEAT');
+        
+        this.resto = new CGFappearance(this.scene);
+        this.resto.setAmbient(0.7,0.7,0.7,1);
+        this.resto.setDiffuse(0.9,0.9,0.9,1);
+        this.resto.setShininess(10);
+        this.resto.loadTexture('images/blimp/pcp.png');
+        this.resto.setTextureWrap('REPEAT','REPEAT');
     }
     
     display() {
@@ -27,12 +41,14 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.angle * Math.PI / 180, 0, 1, 0);
 
         // Balloon
+        this.baloon.apply();
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 1);
         this.sphere.display();
         this.scene.popMatrix();
 
         // Cockpit
+        
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
         this.scene.scale(0.1, 0.1, 0.7);
@@ -42,6 +58,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         // Cockpit tips
+        
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0.35);
         this.scene.scale(0.1, 0.1, 0.1);
@@ -81,6 +98,7 @@ class MyVehicle extends CGFobject {
 
         // Fins
         // Vertical
+        this.resto.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 1/3, -1);
         this.scene.rotate(this.fin_dir, 0, 1, 0);
@@ -124,6 +142,7 @@ class MyVehicle extends CGFobject {
         
         this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
         this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+        // TODO melhorar hierarquia entre os objetos
         this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
     }
 
