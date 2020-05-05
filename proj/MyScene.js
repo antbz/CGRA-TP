@@ -29,6 +29,7 @@ class MyScene extends CGFscene {
         this.unitCylinder = new MyCylinder(this, 200);
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
+        this.terrain = new MyTerrain(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -66,7 +67,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(30, 20, 30), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -151,9 +152,12 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         
         this.pushMatrix();
+        this.translate(0, 10, 0);
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.vehicle.display();
         this.popMatrix();
+
+        this.terrain.display();
 
         this.cubeMap.display();
 
