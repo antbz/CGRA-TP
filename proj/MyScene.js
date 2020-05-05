@@ -29,6 +29,7 @@ class MyScene extends CGFscene {
         this.unitCylinder = new MyCylinder(this, 200);
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
+        this.terrain = new MyTerrain(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -153,6 +154,11 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.vehicle.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(0, -20, 0);
+        this.terrain.display();
         this.popMatrix();
 
         this.cubeMap.display();
