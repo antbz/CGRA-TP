@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
         this.scaleFactor = 1;
 
-        // Textures
+        // Textures 
         this.textures = [
             new CGFtexture(this, 'images/earth.jpg')
         ];
