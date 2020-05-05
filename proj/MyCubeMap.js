@@ -58,6 +58,23 @@ class MyCubeMap extends CGFobject {
         this.rightMaterial.loadTexture('images/split_cubemap/right.png');
         this.rightMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
+    updateTexture() {
+        if (this.scene.landscapeTexture == 0) {
+            this.topMaterial.loadTexture('images/split_cubemap/top.png');
+            this.bottomMaterial.loadTexture('images/split_cubemap/bottom.png');
+            this.frontMaterial.loadTexture('images/split_cubemap/front.png');
+            this.backMaterial.loadTexture('images/split_cubemap/back.png');
+            this.leftMaterial.loadTexture('images/split_cubemap/left.png');
+            this.rightMaterial.loadTexture('images/split_cubemap/right.png');
+        } else if (this.scene.landscapeTexture == 1) {
+            this.topMaterial.loadTexture('images/split_cubemap2/top.png');
+            this.bottomMaterial.loadTexture('images/split_cubemap2/bottom.png');
+            this.frontMaterial.loadTexture('images/split_cubemap2/front.png');
+            this.backMaterial.loadTexture('images/split_cubemap2/back.png');
+            this.leftMaterial.loadTexture('images/split_cubemap2/left.png');
+            this.rightMaterial.loadTexture('images/split_cubemap2/right.png');
+        }
+    }
     display(){
         this.scene.pushMatrix();
 

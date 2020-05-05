@@ -34,6 +34,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.speedFactor = 1;
         this.scaleFactor = 1;
+        this.landscapeTexture = 0;
 
         // Textures 
         this.textures = [
@@ -42,14 +43,19 @@ class MyScene extends CGFscene {
         this.textureList = {
             'Earth' : 0
         };
+        // Landscape textures
+        this.lsTextureList = {
+            'Default' : 0,
+            'Mars' : 1
+        };
 
         // Material
-        this.material = new CGFappearance(this);
-        this.material.setAmbient(0.7,0.7,0.7,1);
-        this.material.setDiffuse(0.9,0.9,0.9,1);
-        this.material.setShininess(10);
-        this.material.loadTexture('images/earth.jpg');
-        this.material.setTextureWrap('REPEAT','REPEAT');
+        // this.material = new CGFappearance(this);
+        // this.material.setAmbient(0.7,0.7,0.7,1);
+        // this.material.setDiffuse(0.9,0.9,0.9,1);
+        // this.material.setShininess(10);
+        // this.material.loadTexture('images/earth.jpg');
+        // this.material.setTextureWrap('REPEAT','REPEAT');
 
     }
     initLights() {
@@ -74,22 +80,26 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyW")) {
             text += " W ";
-            this.vehicle.accelerate(0.2 * this.speedFactor);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.accelerate(0.2 * this.speedFactor);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text += " S ";
-            this.vehicle.accelerate(-0.2 * this.speedFactor);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.accelerate(-0.2 * this.speedFactor);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyA")) {
             text += " A ";
-            this.vehicle.turn(5);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.turn(5);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyD")) {
             text += " D ";
-            this.vehicle.turn(-5);
+            if (!this.vehicle.autoPilot)
+                this.vehicle.turn(-5);
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyR")) {
@@ -99,7 +109,8 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyP")) {
             text += " P ";
-            this.vehicle.autoPilotToggle();
+            if (!this.vehicle.autoPilot)
+                this.vehicle.autoPilotToggle();
             keysPressed = true;
         }
         if (keysPressed) {
@@ -107,6 +118,9 @@ class MyScene extends CGFscene {
         } else if (!this.vehicle.autoPilot) {
             this.vehicle.turn(0);
         }
+    }
+    updateLSTexture() {
+        this.cubeMap.updateTexture();
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
