@@ -30,6 +30,11 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
+        this.supplies = [];
+        this.supplyID = 0;
+        for (var i = 0; i < 5; i++) {
+            this.supplies.push(new MySupply(this));
+        }
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -50,14 +55,7 @@ class MyScene extends CGFscene {
             'Mars' : 1
         };
 
-        // Material
-        // this.material = new CGFappearance(this);
-        // this.material.setAmbient(0.7,0.7,0.7,1);
-        // this.material.setDiffuse(0.9,0.9,0.9,1);
-        // this.material.setShininess(10);
-        // this.material.loadTexture('images/earth.jpg');
-        // this.material.setTextureWrap('REPEAT','REPEAT');
-
+        this.cooldown = 0;
     }
     initLights() {
         this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);
@@ -106,6 +104,10 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")) {
             text += " R ";
             this.vehicle.reset();
+            for (var i = 0; i < this.supplyID; i++) {
+                this.supplies[i].reset();
+            }
+            this.supplyID = 0;
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyP")) {
@@ -114,7 +116,18 @@ class MyScene extends CGFscene {
                 this.vehicle.autoPilotToggle();
             keysPressed = true;
         }
+        if (this.gui.isKeyPressed("KeyL") && this.cooldown == 0) {
+            text += " L ";
+            
+            this.cooldown = 15;
+            if (this.supplyID < this.supplies.length) {
+                this.supplies[this.supplyID].drop(this.vehicle.x_pos, this.vehicle.z_pos);
+                this.supplyID++;
+            }
+            keysPressed = true;
+        }
         if (keysPressed) {
+            
             console.log(text);
         } else if (!this.vehicle.autoPilot) {
             this.vehicle.turn(0);
@@ -125,9 +138,12 @@ class MyScene extends CGFscene {
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        //To be done...
+        if (this.cooldown > 0) { this.cooldown--; }
         this.checkKeys();
         this.vehicle.update(t);
+        for (var i = 0; i < this.supplyID; i++) {
+            this.supplies[i].update(t);
+        }
     }
 
     display() {
@@ -158,6 +174,9 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         this.terrain.display();
+        for (var i = 0; i < this.supplyID; i++) {
+            this.supplies[i].display();
+        }
 
         this.cubeMap.display();
 
