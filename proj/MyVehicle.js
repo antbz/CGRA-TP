@@ -6,6 +6,7 @@ class MyVehicle extends CGFobject {
         this.cylinder = new MyCylinder(scene, 20);
         this.fin = new MyFin(scene);
         this.propeller = new MyPropeller(scene);
+        this.flag = new MyPlane(scene,20);
 
         this.angle = 0;
         this.speed = 0;
@@ -33,6 +34,20 @@ class MyVehicle extends CGFobject {
         this.resto.setShininess(10);
         this.resto.loadTexture('images/blimp/pcp.png');
         this.resto.setTextureWrap('REPEAT','REPEAT');
+
+        this.flagtexture = new CGFappearance(this.scene);
+        this.flagtexture.setAmbient(0.7,0.7,0.7,1);
+        this.flagtexture.setDiffuse(0.9,0.9,0.9,1);
+        this.flagtexture.setShininess(10);
+        this.flagtexture.loadTexture('images/gunaflag.jpg');
+        this.flagtexture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.flagshader = new CGFshader(this.scene.gl,"shaders/flag.vert", "shaders/flag.frag");
+        this.flagshader.setUniformsValues({uSampler1: 1})
+        this.flagshader.setUniformsValues({speed: this.speed});
+        this.flagshader.setUniformsValues({timeFactor: this.prevUpdate});
+        this.flagmap = new CGFtexture(this.scene,"images/gunaflag_map.jpg");
+
     }
     
     display() {
@@ -121,7 +136,31 @@ class MyVehicle extends CGFobject {
         this.fin.display();
         this.scene.popMatrix();
 
+        //Flag
+        this.flagtexture.apply();
+        this.scene.setActiveShader(this.flagshader);
+        this.scene.pushMatrix();
+        this.flagmap.bind(1);
+        this.scene.translate(0,0,-3);
+        this.scene.scale(1,1,2);
+        this.scene.rotate(Math.PI/2, 0, -1, 0);
+        this.flag.display();
+        this.scene.setActiveShader(this.scene.defaultShader);
+
+        
+        this.scene.setActiveShader(this.flagshader);
+        this.flagmap.bind(1);
+        this.scene.rotate(Math.PI, 0, -1, 0);
+        this.flag.display();
         this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
+
+
+        this.scene.popMatrix();
+
+
+        
+
     }
 
     autoPilotToggle() { 
@@ -149,6 +188,10 @@ class MyVehicle extends CGFobject {
             // TODO melhorar hierarquia entre os objetos
             this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
         }
+
+        this.flagshader.setUniformsValues({speed: this.speed});
+        this.flagshader.setUniformsValues({timeFactor: elapsed});
+
     }
 
     turn(val) {
