@@ -24,14 +24,14 @@ class MyVehicle extends CGFobject {
         this.baloon.setAmbient(0.7,0.7,0.7,1);
         this.baloon.setDiffuse(0.9,0.9,0.9,1);
         this.baloon.setShininess(10);
-        this.baloon.loadTexture('images/blimp/avante.jpg');
+        this.baloon.loadTexture('images/blimp/balloon.png');
         this.baloon.setTextureWrap('REPEAT','REPEAT');
         
         this.resto = new CGFappearance(this.scene);
         this.resto.setAmbient(0.7,0.7,0.7,1);
         this.resto.setDiffuse(0.9,0.9,0.9,1);
         this.resto.setShininess(10);
-        this.resto.loadTexture('images/blimp/pcp.png');
+        this.resto.loadTexture('images/blimp/aperture_fin.png');
         this.resto.setTextureWrap('REPEAT','REPEAT');
     }
     
