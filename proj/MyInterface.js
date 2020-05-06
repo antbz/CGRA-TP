@@ -43,6 +43,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
         //display elements
         this.gui.add(this.scene, 'displayFlag').name('Display Flag');
+        this.gui.add(this.scene, 'displayBillboard').name('Display Billboard');
         //Selectors
         this.gui.add(this.scene, 'landscapeTexture', this.scene.lsTextureList).name('Landscape').onChange(this.scene.updateLSTexture.bind(this.scene));
 

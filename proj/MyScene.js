@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
+        this.billboard = new MyBillboard(this);
         this.supplies = [];
         this.supplyID = 0;
         for (var i = 0; i < 5; i++) {
@@ -42,6 +43,7 @@ class MyScene extends CGFscene {
         this.scaleFactor = 1;
         this.landscapeTexture = 0;
         this.displayFlag = true;
+        this.displayBillboard = true;
 
         // Textures 
         this.textures = [
@@ -108,6 +110,7 @@ class MyScene extends CGFscene {
             for (var i = 0; i < this.supplyID; i++) {
                 this.supplies[i].reset();
             }
+            this.billboard.reset();
             this.supplyID = 0;
             keysPressed = true;
         }
@@ -124,6 +127,7 @@ class MyScene extends CGFscene {
             if (this.supplyID < this.supplies.length) {
                 this.supplies[this.supplyID].drop(this.vehicle.x_pos, this.vehicle.z_pos);
                 this.supplyID++;
+                this.billboard.update();
             }
             keysPressed = true;
         }
@@ -145,6 +149,7 @@ class MyScene extends CGFscene {
         for (var i = 0; i < this.supplyID; i++) {
             this.supplies[i].update(t);
         }
+
     }
 
     display() {
@@ -180,6 +185,8 @@ class MyScene extends CGFscene {
         }
 
         this.cubeMap.display();
+        if(this.displayBillboard)
+            this.billboard.display();
 
         // ---- END Primitive drawing section
     }
