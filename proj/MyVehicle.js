@@ -3,10 +3,13 @@ class MyVehicle extends CGFobject {
 		super(scene);
         
         this.sphere = new MySphere(scene, 20, 20);
-        this.cylinder = new MyCylinder(scene, 20);
+        this.semisphere = new MySemiSphere(scene, 10, 20);
+        this.cylinder = new MyCylinder(scene, 30);
         this.fin = new MyFin(scene);
         this.propeller = new MyPropeller(scene);
         this.flag = new MyPlane(scene,20);
+        this.flagString = new MyUnitCubeQuad(scene);
+
 
         this.angle = 0;
         this.speed = 0;
@@ -21,11 +24,15 @@ class MyVehicle extends CGFobject {
 
         this.prevUpdate = 0;
 
+        this.initMaterials();
+    }
+
+    initMaterials() {
         this.baloon = new CGFappearance(this.scene);
         this.baloon.setAmbient(0.7,0.7,0.7,1);
         this.baloon.setDiffuse(0.9,0.9,0.9,1);
         this.baloon.setShininess(10);
-        this.baloon.loadTexture('images/blimp/avante.jpg');
+        this.baloon.loadTexture('images/blimp/balloon.png');
         this.baloon.setTextureWrap('REPEAT','REPEAT');
         
         this.resto = new CGFappearance(this.scene);
@@ -39,15 +46,34 @@ class MyVehicle extends CGFobject {
         this.flagtexture.setAmbient(0.7,0.7,0.7,1);
         this.flagtexture.setDiffuse(0.9,0.9,0.9,1);
         this.flagtexture.setShininess(10);
-        this.flagtexture.loadTexture('images/gunaflag.jpg');
+        this.flagtexture.loadTexture('images/theflag.jpg');
         this.flagtexture.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.flagshader = new CGFshader(this.scene.gl,"shaders/flag.vert", "shaders/flag.frag");
-        this.flagshader.setUniformsValues({uSampler1: 1})
-        this.flagshader.setUniformsValues({speed: this.speed});
-        this.flagshader.setUniformsValues({timeFactor: this.prevUpdate});
-        this.flagmap = new CGFtexture(this.scene,"images/gunaflag_map.jpg");
+        this.flagshaderR = new CGFshader(this.scene.gl,"shaders/flagR.vert", "shaders/flag.frag");
+        this.flagshaderR.setUniformsValues({uSampler1: 3})
+        this.flagshaderR.setUniformsValues({speed: this.speed});
+        this.flagshaderR.setUniformsValues({timeFactor: this.prevUpdate});
 
+        this.flagshaderL = new CGFshader(this.scene.gl,"shaders/flagL.vert", "shaders/flag.frag");
+        this.flagshaderL.setUniformsValues({uSampler1: 3})
+        this.flagshaderL.setUniformsValues({speed: this.speed});
+        this.flagshaderL.setUniformsValues({timeFactor: this.prevUpdate});
+
+        this.flagmap = new CGFtexture(this.scene,"images/theflag.jpg");
+
+        this.cockpit_tips = new CGFappearance(this.scene);
+        this.cockpit_tips.setAmbient(0.7,0.7,0.7,1);
+        this.cockpit_tips.setDiffuse(0.9,0.9,0.9,1);
+        this.cockpit_tips.setShininess(10);
+        this.cockpit_tips.loadTexture('images/blimp/cockpit_window.png');
+        this.cockpit_tips.setTextureWrap('REPEAT','REPEAT');
+
+        this.cockpit = new CGFappearance(this.scene);
+        this.cockpit.setAmbient(0.7,0.7,0.7,1);
+        this.cockpit.setDiffuse(0.9,0.9,0.9,1);
+        this.cockpit.setShininess(10);
+        this.cockpit.loadTexture('images/blimp/cockpit_body.png');
+        this.cockpit.setTextureWrap('REPEAT','REPEAT');
     }
     
     display() {
@@ -63,29 +89,31 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         // Cockpit
-        
+        this.cockpit.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
-        this.scene.scale(0.1, 0.1, 0.7);
+        this.scene.scale(0.1, 0.1, 0.701);
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.cylinder.display();
         this.scene.popMatrix();
 
         // Cockpit tips
-        
+        this.cockpit_tips.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0.35);
+        this.scene.rotate(Math.PI, 0, 1, 0);
         this.scene.scale(0.1, 0.1, 0.1);
-        this.sphere.display();
+        this.semisphere.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, -0.35);
         this.scene.scale(0.1, 0.1, 0.1);
-        this.sphere.display();
+        this.semisphere.display();
         this.scene.popMatrix();
 
         // Engines
+        this.baloon.apply();
         this.scene.pushMatrix();
         this.scene.translate(0.1, -0.52, -0.35);
         this.scene.scale(0.05, 0.05, 0.1);
@@ -113,7 +141,6 @@ class MyVehicle extends CGFobject {
 
         // Fins
         // Vertical
-        this.resto.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 1/3, -1);
         this.scene.rotate(this.fin_dir, 0, 1, 0);
@@ -137,24 +164,38 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         //Flag
+        if(this.scene.displayFlag){
         this.flagtexture.apply();
-        this.scene.setActiveShader(this.flagshader);
         this.scene.pushMatrix();
-        this.flagmap.bind(1);
-        this.scene.translate(0,0,-3);
+        this.scene.translate(0,0.4,-1.5);
+        this.scene.scale(0.01,0.01,0.65);
+        this.flagString.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(0,-0.4,-1.5);
+        this.scene.scale(0.01,0.01,0.65);
+        this.flagString.display();
+        this.scene.popMatrix();
+        
+
+        this.flagtexture.apply();
+        this.scene.setActiveShader(this.flagshaderR);
+        this.flagmap.bind(3);
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-2.8);
         this.scene.scale(1,1,2);
         this.scene.rotate(Math.PI/2, 0, -1, 0);
         this.flag.display();
         this.scene.setActiveShader(this.scene.defaultShader);
 
         
-        this.scene.setActiveShader(this.flagshader);
-        this.flagmap.bind(1);
+        this.scene.setActiveShader(this.flagshaderL);
+        this.flagmap.bind(3);
         this.scene.rotate(Math.PI, 0, -1, 0);
         this.flag.display();
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);
-
+        }
 
         this.scene.popMatrix();
 
@@ -189,8 +230,10 @@ class MyVehicle extends CGFobject {
             this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
         }
 
-        this.flagshader.setUniformsValues({speed: this.speed});
-        this.flagshader.setUniformsValues({timeFactor: elapsed});
+        this.flagshaderR.setUniformsValues({speed: this.speed});
+        this.flagshaderR.setUniformsValues({timeFactor: elapsed});
+        this.flagshaderL.setUniformsValues({speed: this.speed});
+        this.flagshaderL.setUniformsValues({timeFactor: elapsed});
 
     }
 

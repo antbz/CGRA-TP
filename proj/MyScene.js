@@ -41,6 +41,7 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
         this.scaleFactor = 1;
         this.landscapeTexture = 0;
+        this.displayFlag = true;
 
         // Textures 
         this.textures = [
