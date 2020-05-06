@@ -3,7 +3,8 @@ class MyVehicle extends CGFobject {
 		super(scene);
         
         this.sphere = new MySphere(scene, 20, 20);
-        this.cylinder = new MyCylinder(scene, 20);
+        this.semisphere = new MySemiSphere(scene, 10, 20);
+        this.cylinder = new MyCylinder(scene, 30);
         this.fin = new MyFin(scene);
         this.propeller = new MyPropeller(scene);
 
@@ -20,6 +21,10 @@ class MyVehicle extends CGFobject {
 
         this.prevUpdate = 0;
 
+        this.initMaterials();
+    }
+
+    initMaterials() {
         this.baloon = new CGFappearance(this.scene);
         this.baloon.setAmbient(0.7,0.7,0.7,1);
         this.baloon.setDiffuse(0.9,0.9,0.9,1);
@@ -27,12 +32,19 @@ class MyVehicle extends CGFobject {
         this.baloon.loadTexture('images/blimp/balloon.png');
         this.baloon.setTextureWrap('REPEAT','REPEAT');
         
-        this.resto = new CGFappearance(this.scene);
-        this.resto.setAmbient(0.7,0.7,0.7,1);
-        this.resto.setDiffuse(0.9,0.9,0.9,1);
-        this.resto.setShininess(10);
-        this.resto.loadTexture('images/blimp/aperture_fin.png');
-        this.resto.setTextureWrap('REPEAT','REPEAT');
+        this.cockpit_tips = new CGFappearance(this.scene);
+        this.cockpit_tips.setAmbient(0.7,0.7,0.7,1);
+        this.cockpit_tips.setDiffuse(0.9,0.9,0.9,1);
+        this.cockpit_tips.setShininess(10);
+        this.cockpit_tips.loadTexture('images/blimp/cockpit_window.png');
+        this.cockpit_tips.setTextureWrap('REPEAT','REPEAT');
+
+        this.cockpit = new CGFappearance(this.scene);
+        this.cockpit.setAmbient(0.7,0.7,0.7,1);
+        this.cockpit.setDiffuse(0.9,0.9,0.9,1);
+        this.cockpit.setShininess(10);
+        this.cockpit.loadTexture('images/blimp/cockpit_body.png');
+        this.cockpit.setTextureWrap('REPEAT','REPEAT');
     }
     
     display() {
@@ -48,29 +60,31 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         // Cockpit
-        
+        this.cockpit.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
-        this.scene.scale(0.1, 0.1, 0.7);
+        this.scene.scale(0.1, 0.1, 0.701);
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
         this.cylinder.display();
         this.scene.popMatrix();
 
         // Cockpit tips
-        
+        this.cockpit_tips.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0.35);
+        this.scene.rotate(Math.PI, 0, 1, 0);
         this.scene.scale(0.1, 0.1, 0.1);
-        this.sphere.display();
+        this.semisphere.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, -0.35);
         this.scene.scale(0.1, 0.1, 0.1);
-        this.sphere.display();
+        this.semisphere.display();
         this.scene.popMatrix();
 
         // Engines
+        this.baloon.apply();
         this.scene.pushMatrix();
         this.scene.translate(0.1, -0.52, -0.35);
         this.scene.scale(0.05, 0.05, 0.1);
@@ -98,7 +112,6 @@ class MyVehicle extends CGFobject {
 
         // Fins
         // Vertical
-        this.resto.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, 1/3, -1);
         this.scene.rotate(this.fin_dir, 0, 1, 0);
