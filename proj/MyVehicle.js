@@ -231,9 +231,9 @@ class MyVehicle extends CGFobject {
         }
 
         this.flagshaderR.setUniformsValues({speed: this.speed});
-        this.flagshaderR.setUniformsValues({timeFactor: elapsed});
+        this.flagshaderR.setUniformsValues({timeFactor: t / 1000 % 1000});
         this.flagshaderL.setUniformsValues({speed: this.speed});
-        this.flagshaderL.setUniformsValues({timeFactor: elapsed});
+        this.flagshaderL.setUniformsValues({timeFactor: t / 1000 % 1000});
 
     }
 

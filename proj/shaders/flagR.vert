@@ -21,7 +21,7 @@ void main() {
 
     vec3 offset=vec3(0.0,0.0,0.0);
 
-    offset.z = 0.2 * sin((aVertexPosition.x-0.5)*timeFactor*0.2) * cos((speed*5.0)*(timeFactor * 0.05) + (timeFactor * 0.05));
+    offset.z = cos((aVertexPosition.x + timeFactor * (0.5 + speed * 0.15))* 20.0) * 0.05;// * (speed + 0.5);
 
     gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
 
