@@ -2,21 +2,13 @@ class MyBoxOpen extends CGFobject {
     constructor(scene) {
         super(scene);
 
-        this.sphere = new MySphere(scene, 10, 10);
+        this.cake = new MyCake(scene);
         this.quad = new MyQuad(scene);
 
         this.initMaterials();
     }
 
     initMaterials() {
-        this.gold = new CGFappearance(this.scene);
-        this.gold.setAmbient(1, 1, 1, 1);
-        this.gold.setDiffuse(1.0, 1.0, 1.0, 1);
-        this.gold.setSpecular(1.0, 1.0, 1.0, 1);
-        this.gold.setShininess(10000.0);
-        this.gold.loadTexture('images/supplies/gold.jpg');
-        this.gold.setTextureWrap('REPEAT', 'REPEAT');
-
         this.box = new CGFappearance(this.scene);
         this.box.setAmbient(0.9, 0.9, 0.9, 1);
         this.box.setDiffuse(0.0, 0.0, 0.0, 1);
@@ -58,10 +50,9 @@ class MyBoxOpen extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        this.gold.apply();
-
-        this.scene.translate(0, 0.5, 0);
+        this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
-        this.sphere.display();
+        this.cake.display();
+        this.scene.popMatrix();
     }
 }

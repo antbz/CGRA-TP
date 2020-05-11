@@ -45,13 +45,6 @@ class MyScene extends CGFscene {
         this.displayFlag = true;
         this.displayBillboard = true;
 
-        // Textures 
-        this.textures = [
-            new CGFtexture(this, 'images/earth.jpg')
-        ];
-        this.textureList = {
-            'Earth' : 0
-        };
         // Landscape textures
         this.lsTextureList = {
             'Default' : 0,
