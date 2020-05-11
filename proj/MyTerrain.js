@@ -6,10 +6,18 @@ class MyTerrain extends CGFobject {
         
         this.shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
         this.map = new CGFtexture(this.scene, "images/terrain/heightmap.jpg");
-        this.texture = new CGFtexture(this.scene, "images/terrain/terrain.jpg");
+        this.texture = new CGFtexture(this.scene, "images/terrain/terrain_grass.jpg");
 
         this.shader.setUniformsValues({ uSamplerV : 1 });
         this.shader.setUniformsValues({ uSamplerF : 2 });
+    }
+
+    updateTexture() {
+        if (this.scene.landscapeTexture == 0) {
+            this.texture = new CGFtexture(this.scene, "images/terrain/terrain_grass.jpg");
+        } else if (this.scene.landscapeTexture == 1) {
+            this.texture = new CGFtexture(this.scene, "images/terrain/terrain_sand.jpg");
+        }
     }
 
     display() {

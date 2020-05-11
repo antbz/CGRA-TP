@@ -38,7 +38,7 @@ class MyScene extends CGFscene {
         }
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.speedFactor = 1;
         this.scaleFactor = 1;
         this.landscapeTexture = 0;
@@ -140,6 +140,7 @@ class MyScene extends CGFscene {
     }
     updateLSTexture() {
         this.cubeMap.updateTexture();
+        this.terrain.updateTexture();
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
