@@ -13,14 +13,14 @@ class MyFin extends CGFobject {
         this.triangleMaterial.setAmbient(0.7,0.7,0.7,1);
         this.triangleMaterial.setDiffuse(0.9,0.9,0.9,1);
         this.triangleMaterial.setShininess(10);
-        this.triangleMaterial.loadTexture('images/blimp/fin_trig.png');
+        this.triangleMaterial.loadTexture('images/blimp/fin/fin_trig.png');
         this.triangleMaterial.setTextureWrap('REPEAT','REPEAT');
 
         this.quadMaterial = new CGFappearance(this.scene);
         this.quadMaterial.setAmbient(0.7,0.7,0.7,1);
         this.quadMaterial.setDiffuse(0.9,0.9,0.9,1);
         this.quadMaterial.setShininess(10);
-        this.quadMaterial.loadTexture('images/blimp/fin_quad.png');
+        this.quadMaterial.loadTexture('images/blimp/fin/fin_quad.png');
         this.quadMaterial.setTextureWrap('REPEAT','REPEAT');
     }
 

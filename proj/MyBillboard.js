@@ -26,14 +26,14 @@ class MyBillboard extends CGFobject {
         this.boardbody.setAmbient(0.1, 0.1, 0.1, 1);
         this.boardbody.setDiffuse(0.9, 0.9, 0.9, 1);
         this.boardbody.setShininess(10.0);
-        this.boardbody.loadTexture('images/billboard.jpg');
+        this.boardbody.loadTexture('images/billboard/billboard.jpg');
         this.boardbody.setTextureWrap('REPEAT', 'REPEAT');
 
         this.boardlegs = new CGFappearance(this.scene);
         this.boardlegs.setAmbient(0.1, 0.1, 0.1, 1);
         this.boardlegs.setDiffuse(0.1, 0.1, 0.1, 1);
         this.boardlegs.setShininess(10.0);
-        this.boardlegs.loadTexture('images/boardlegs.jpg');
+        this.boardlegs.loadTexture('images/billboard/boardlegs.jpg');
         this.boardlegs.setTextureWrap('REPEAT', 'REPEAT');
     }
 

@@ -14,7 +14,7 @@ class MyBoxOpen extends CGFobject {
         this.gold.setDiffuse(1.0, 1.0, 1.0, 1);
         this.gold.setSpecular(1.0, 1.0, 1.0, 1);
         this.gold.setShininess(10000.0);
-        this.gold.loadTexture('images/gold.jpg');
+        this.gold.loadTexture('images/supplies/gold.jpg');
         this.gold.setTextureWrap('REPEAT', 'REPEAT');
 
         this.box = new CGFappearance(this.scene);
@@ -22,7 +22,7 @@ class MyBoxOpen extends CGFobject {
         this.box.setDiffuse(0.0, 0.0, 0.0, 1);
         this.box.setSpecular(0.0, 0.0, 0.0, 1);
         this.box.setShininess(10.0);
-        this.box.loadTexture('images/box_in.jpg');
+        this.box.loadTexture('images/supplies/box_in.jpg');
         this.box.setTextureWrap('REPEAT', 'REPEAT');
     }
 

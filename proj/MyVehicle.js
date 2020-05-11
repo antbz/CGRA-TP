@@ -30,21 +30,21 @@ class MyVehicle extends CGFobject {
         this.baloon.setAmbient(0.7,0.7,0.7,1);
         this.baloon.setDiffuse(0.9,0.9,0.9,1);
         this.baloon.setShininess(10);
-        this.baloon.loadTexture('images/blimp/balloon.png');
+        this.baloon.loadTexture('images/blimp/body/balloon.png');
         this.baloon.setTextureWrap('REPEAT','REPEAT');
 
         this.cockpit_tips = new CGFappearance(this.scene);
         this.cockpit_tips.setAmbient(0.7,0.7,0.7,1);
         this.cockpit_tips.setDiffuse(0.9,0.9,0.9,1);
         this.cockpit_tips.setShininess(10);
-        this.cockpit_tips.loadTexture('images/blimp/cockpit_window.png');
+        this.cockpit_tips.loadTexture('images/blimp/body/cockpit_window.png');
         this.cockpit_tips.setTextureWrap('REPEAT','REPEAT');
 
         this.cockpit = new CGFappearance(this.scene);
         this.cockpit.setAmbient(0.7,0.7,0.7,1);
         this.cockpit.setDiffuse(0.9,0.9,0.9,1);
         this.cockpit.setShininess(10);
-        this.cockpit.loadTexture('images/blimp/cockpit_body.png');
+        this.cockpit.loadTexture('images/blimp/body/cockpit_body.png');
         this.cockpit.setTextureWrap('REPEAT','REPEAT');
     }
     
@@ -165,7 +165,6 @@ class MyVehicle extends CGFobject {
         } else {      
             this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
             this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-            // TODO melhorar hierarquia entre os objetos
             this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
         }
 
