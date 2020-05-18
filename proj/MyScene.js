@@ -20,6 +20,7 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.setUpdatePeriod(50);
+        this.prevUpdate = 0;
         
         this.enableTextures(true);
 
@@ -137,13 +138,16 @@ class MyScene extends CGFscene {
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+        if (this.prevUpdate == 0) { this.prevUpdate = t; }
+        var elapsed = t - this.prevUpdate;
+        this.prevUpdate = t;
+
         if (this.cooldown > 0) { this.cooldown--; }
         this.checkKeys();
-        this.vehicle.update(t);
+        this.vehicle.update(t, elapsed);
         for (var i = 0; i < this.supplyID; i++) {
-            this.supplies[i].update(t);
+            this.supplies[i].update(elapsed);
         }
-
     }
 
     display() {

@@ -10,19 +10,12 @@ class MySupply extends CGFobject {
 
         this.state = SupplyStates.INACTIVE;
         this.x = 0; this.y = 9; this.z = 0;
-        this.prevUpdate = 0;
 
         this.box = new MyBox(scene);
         this.boxOpen = new MyBoxOpen(scene);
     }
 
-    update(t) {
-        if (this.prevUpdate == 0) {
-            this.prevUpdate = t;
-        }
-        var elapsed = t - this.prevUpdate;
-        this.prevUpdate = t;
-
+    update(elapsed) {
         if (this.state == SupplyStates.FALLING) {
             this.y -= elapsed * (8.9 / 3000.0);
             if (this.y <= 0.1) {
@@ -44,7 +37,6 @@ class MySupply extends CGFobject {
 
     reset() {
         this.y = 9;
-        this.prevUpdate = 0;
         this.state = SupplyStates.INACTIVE;
     }
 

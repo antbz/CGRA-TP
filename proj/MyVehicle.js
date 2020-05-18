@@ -20,8 +20,6 @@ class MyVehicle extends CGFobject {
         this.x_centre = 0;
         this.z_centre = 0;
 
-        this.prevUpdate = 0;
-
         this.initMaterials();
     }
 
@@ -150,13 +148,7 @@ class MyVehicle extends CGFobject {
         this.z_centre = this.z_pos + 5*Math.cos(ang);
     }
 
-    update(t) {
-        if (this.prevUpdate == 0) {
-            this.prevUpdate = t;
-        }
-        var elapsed = t - this.prevUpdate;
-        this.prevUpdate = t;
-
+    update(t, elapsed) {
         if (this.autoPilot) {
             this.x_pos = -5 * Math.cos(this.angle * Math.PI / 180) + this.x_centre;
             this.z_pos = 5 * Math.sin(this.angle * Math.PI / 180) + this.z_centre;
