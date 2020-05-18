@@ -49,7 +49,7 @@ class MyVehicle extends CGFobject {
     display() {
         this.scene.pushMatrix();
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
-        this.scene.rotate(this.angle * Math.PI / 180, 0, 1, 0);
+        this.scene.rotate(this.angle, 0, 1, 0);
 
         // Balloon
         this.baloon.apply();
@@ -143,20 +143,20 @@ class MyVehicle extends CGFobject {
 
     autoPilotToggle() { 
         this.autoPilot = true;
-        var ang = (this.angle + 90) * Math.PI / 180;
+        var ang = this.angle + Math.PI/2;
         this.x_centre = this.x_pos + 5*Math.sin(ang);
         this.z_centre = this.z_pos + 5*Math.cos(ang);
     }
 
     update(t, elapsed) {
         if (this.autoPilot) {
-            this.x_pos = -5 * Math.cos(this.angle * Math.PI / 180) + this.x_centre;
-            this.z_pos = 5 * Math.sin(this.angle * Math.PI / 180) + this.z_centre;
-            this.turn(360 * elapsed / 5000.0);
+            this.x_pos = -5 * Math.cos(this.angle) + this.x_centre;
+            this.z_pos = 5 * Math.sin(this.angle) + this.z_centre;
+            this.turn(Math.PI * elapsed / 2500.0);
             this.prop_ang = (this.prop_ang + 20) % (Math.PI * 2);
         } else {      
-            this.x_pos += this.speed * Math.sin(this.angle * Math.PI / 180) * (elapsed / 1000.0);
-            this.z_pos += this.speed * Math.cos(this.angle * Math.PI / 180) * (elapsed / 1000.0);
+            this.x_pos += this.speed * Math.sin(this.angle) * (elapsed / 1000.0);
+            this.z_pos += this.speed * Math.cos(this.angle) * (elapsed / 1000.0);
             this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
         }
 
@@ -165,8 +165,8 @@ class MyVehicle extends CGFobject {
 
     turn(val) {
         this.angle += val;
-        this.angle %= 360;
-        this.fin_dir = -val*3 * Math.PI / 180;
+        this.angle %= (Math.PI * 2);
+        this.fin_dir = -val*3;
     }
 
     accelerate(val) {
