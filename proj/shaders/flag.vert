@@ -22,12 +22,10 @@ void main() {
 
     vec3 offset=vec3(0.0,0.0,0.0);
 
-    if (aVertexPosition.x > -0.49) {
-        if (side == 0) {
-            offset.z = -cos((-aVertexPosition.x + timeFactor * (0.5 + speed * 0.15))* 20.0) * 0.05;
-        } else if (side == 1) {
-            offset.z = cos((aVertexPosition.x + timeFactor * (0.5 + speed * 0.15))* 20.0) * 0.05;
-        }
+    if (side == 0 && aVertexPosition.x > -0.49) {
+        offset.z = -cos((-aVertexPosition.x + timeFactor * (0.5 + speed * 0.15))* 20.0) * 0.05;
+    } else if (side == 1 && aVertexPosition.x < 0.49) {
+        offset.z = cos((aVertexPosition.x + timeFactor * (0.5 + speed * 0.15))* 20.0) * 0.05;
     }
     
     gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);

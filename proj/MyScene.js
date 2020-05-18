@@ -131,7 +131,6 @@ class MyScene extends CGFscene {
             keysPressed = true;
         }
         if (keysPressed) {
-            
             console.log(text);
         } else if (!this.vehicle.autoPilot) {
             this.vehicle.turn(0);
