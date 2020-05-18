@@ -54,7 +54,7 @@ class MyBillboard extends CGFobject {
 	display(){
         this.scene.pushMatrix();
         this.scene.translate(14.0, 6.25, 16.0);
-        this.scene.rotate(Math.PI/5, 0, 1, 0);
+        this.scene.rotate(this.scene.pi/5, 0, 1, 0);
         
         // Billboard
         this.boardbody.apply();
@@ -65,7 +65,7 @@ class MyBillboard extends CGFobject {
         // Back
         this.boardback.apply();
         this.scene.pushMatrix();
-        this.scene.rotate(-Math.PI, 0.0, 1.0, 0.0);
+        this.scene.rotate(-this.scene.pi, 0.0, 1.0, 0.0);
         this.scene.scale(2.0, 1.0, 1.0);
         this.plane.display();
         this.scene.popMatrix();
@@ -85,14 +85,14 @@ class MyBillboard extends CGFobject {
         this.scene.popMatrix();
         // Back
         this.scene.pushMatrix();
-        this.scene.rotate(-Math.PI, 0.0, 1.0, 0.0);
+        this.scene.rotate(-this.scene.pi, 0.0, 1.0, 0.0);
         this.scene.translate(-0.95, -1.0, 0.0);
         this.scene.scale(0.1, 1.0, 0);
         this.plane.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.rotate(-Math.PI, 0.0, 1.0, 0.0);
+        this.scene.rotate(-this.scene.pi, 0.0, 1.0, 0.0);
         this.scene.translate(0.95, -1.0, 0.0);
         this.scene.scale(0.1, 1.0, 0.0);
         this.plane.display();

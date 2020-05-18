@@ -42,7 +42,7 @@ class MyCake extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, 1, 0);
         this.scene.scale(1, 0.3, 1);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1, 0, 0);
         this.top.display();
         this.scene.popMatrix();
 
@@ -50,7 +50,7 @@ class MyCake extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, 1.28, 0);
         this.scene.scale(0.1, 0.1, 0.1);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1, 0, 0);
         this.top.display();
         this.scene.popMatrix();        
     }

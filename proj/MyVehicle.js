@@ -64,7 +64,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(0, -0.5, 0);
         this.scene.scale(0.1, 0.1, 0.701);
         this.scene.translate(0, 0, -0.5);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1, 0, 0);
         this.cylinder.display();
         this.scene.popMatrix();
 
@@ -72,7 +72,7 @@ class MyVehicle extends CGFobject {
         this.cockpit_tips.apply();
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0.35);
-        this.scene.rotate(Math.PI, 0, 1, 0);
+        this.scene.rotate(this.scene.pi, 0, 1, 0);
         this.scene.scale(0.1, 0.1, 0.1);
         this.semisphere.display();
         this.scene.popMatrix();
@@ -124,12 +124,12 @@ class MyVehicle extends CGFobject {
         // Horizontal
         this.scene.pushMatrix();
         this.scene.translate(1/3, 0, -1);
-        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(this.scene.pi_2, 0, 0, 1);
         this.fin.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
         this.scene.translate(-1/3, 0, -1);
-        this.scene.rotate(Math.PI/2, 0, 0, 1);
+        this.scene.rotate(this.scene.pi_2, 0, 0, 1);
         this.fin.display();
         this.scene.popMatrix();
 
@@ -143,7 +143,7 @@ class MyVehicle extends CGFobject {
 
     autoPilotToggle() { 
         this.autoPilot = true;
-        var ang = this.angle + Math.PI/2;
+        var ang = this.angle + this.scene.pi_2;
         this.x_centre = this.x_pos + 5*Math.sin(ang);
         this.z_centre = this.z_pos + 5*Math.cos(ang);
     }
@@ -152,12 +152,12 @@ class MyVehicle extends CGFobject {
         if (this.autoPilot) {
             this.x_pos = -5 * Math.cos(this.angle) + this.x_centre;
             this.z_pos = 5 * Math.sin(this.angle) + this.z_centre;
-            this.turn(Math.PI * elapsed / 2500.0);
-            this.prop_ang = (this.prop_ang + 20) % (Math.PI * 2);
+            this.turn(this.scene.pi * elapsed / 2500.0);
+            this.prop_ang = (this.prop_ang + 20) % (this.scene.pi2);
         } else {      
             this.x_pos += this.speed * Math.sin(this.angle) * (elapsed / 1000.0);
             this.z_pos += this.speed * Math.cos(this.angle) * (elapsed / 1000.0);
-            this.prop_ang = (this.prop_ang + this.speed) % (Math.PI * 2);
+            this.prop_ang = (this.prop_ang + this.speed) % (this.scene.pi2);
         }
 
         this.flag.update(this.speed, t);
@@ -165,7 +165,7 @@ class MyVehicle extends CGFobject {
 
     turn(val) {
         this.angle += val;
-        this.angle %= (Math.PI * 2);
+        this.angle %= (this.scene.pi2);
         this.fin_dir = -val*3;
     }
 

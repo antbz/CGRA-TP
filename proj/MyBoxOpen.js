@@ -22,31 +22,31 @@ class MyBoxOpen extends CGFobject {
         this.box.apply();
         
         this.scene.pushMatrix(); // bottom
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix(); // left
         this.scene.translate(-1, 0, 0);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix(); // right
         this.scene.translate(1, 0, 0);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix(); // front
         this.scene.translate(0, 0, 1);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix(); // back
         this.scene.translate(0, 0, -1);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 

@@ -53,6 +53,11 @@ class MyScene extends CGFscene {
         };
 
         this.cooldown = 0;
+
+        this.pi = Math.PI;
+        this.pi2 = Math.PI * 2.0;
+        this.pi_2 = Math.PI / 2.0;
+        this.pi_4 = Math.PI / 4.0;
     }
     initLights() {
         this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);

@@ -34,7 +34,7 @@ class MyFlag extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, 0.4, -1.48);
         this.scene.scale(0.01, 0.01, 0.65);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1, 0, 0);
         this.scene.translate(0, -0.5, 0);
         this.flagString.display();
         this.scene.popMatrix();
@@ -42,7 +42,7 @@ class MyFlag extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, -0.4, -1.48);
         this.scene.scale(0.01, 0.01, 0.65);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1, 0, 0);
         this.scene.translate(0, -0.5, 0);
         this.flagString.display();
         this.scene.popMatrix();
@@ -54,12 +54,12 @@ class MyFlag extends CGFobject {
 
         this.scene.translate(0,0,-2.8);
         this.scene.scale(1,1,2);
-        this.scene.rotate(Math.PI/2, 0, -1, 0);
+        this.scene.rotate(this.scene.pi_2, 0, -1, 0);
         this.flagshader.setUniformsValues( {side: 1} );
         this.flag.display();
 
         this.flagshader.setUniformsValues( {side: 0} );
-        this.scene.rotate(Math.PI, 0, -1, 0);
+        this.scene.rotate(this.scene.pi, 0, -1, 0);
         this.flag.display();
 
         this.scene.popMatrix();

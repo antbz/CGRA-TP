@@ -84,42 +84,41 @@ class MyCubeMap extends CGFobject {
         this.frontMaterial.apply(); //front
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
-        // this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
 
         this.backMaterial.apply(); //back
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
-        this.scene.rotate(Math.PI, 0, 1, 0);
+        this.scene.rotate(this.scene.pi, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
     
         this.bottomMaterial.apply(); //bottom
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
-        this.scene.rotate(-Math.PI/2, 1.0, 0, 0);
+        this.scene.rotate(-this.scene.pi_2, 1.0, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
     
         this.topMaterial.apply(); //top
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
-        this.scene.rotate(Math.PI/2, 1.0, 0, 0);
+        this.scene.rotate(this.scene.pi_2, 1.0, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
     
         this.leftMaterial.apply();//left side
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0, 0);
-        this.scene.rotate(Math.PI/2, 0.0, 1.0, 0);
+        this.scene.rotate(this.scene.pi_2, 0.0, 1.0, 0);
         this.quad.display();
         this.scene.popMatrix();
         
         this.rightMaterial.apply();//right side
         this.scene.pushMatrix();
         this.scene.translate(0.5, 0, 0);
-        this.scene.rotate(-Math.PI/2, 0.0, 1.0, 0);
+        this.scene.rotate(-this.scene.pi_2, 0.0, 1.0, 0);
         this.quad.display();
         this.scene.popMatrix();
  
