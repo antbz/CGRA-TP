@@ -53,7 +53,8 @@ class MyBillboard extends CGFobject {
 
 	display(){
         this.scene.pushMatrix();
-        this.scene.translate(0.0, 2.0, -8.0);
+        this.scene.translate(14.0, 6.25, 16.0);
+        this.scene.rotate(Math.PI/5, 0, 1, 0);
         
         // Billboard
         this.boardbody.apply();
