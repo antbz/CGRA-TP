@@ -26,8 +26,6 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
-        this.unitCylinder = new MyCylinder(this, 200);
         this.cubeMap = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
@@ -115,7 +113,7 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyP") && this.cooldown == 0) {
             text += " P ";
-            this.cooldown = 15;
+            this.cooldown = 5;
             this.vehicle.autoPilotToggle();
             keysPressed = true;
         }
