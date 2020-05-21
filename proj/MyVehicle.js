@@ -11,7 +11,7 @@ class MyVehicle extends CGFobject {
 
         this.angle = 0;
         this.speed = 0;
-        this.x_pos = 0; this.y_pos = 0; this.z_pos = 0;
+        this.x_pos = 0; this.y_pos = 10; this.z_pos = 0;
 
         this.fin_dir = 0;
         this.prop_ang = 0;
@@ -50,6 +50,7 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
         this.scene.rotate(this.angle, 0, 1, 0);
+        this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
 
         // Balloon
         this.baloon.apply();
@@ -142,10 +143,14 @@ class MyVehicle extends CGFobject {
     }
 
     autoPilotToggle() { 
-        this.autoPilot = true;
-        var ang = this.angle + this.scene.pi_2;
-        this.x_centre = this.x_pos + 5*Math.sin(ang);
-        this.z_centre = this.z_pos + 5*Math.cos(ang);
+        if (this.autoPilot) {
+            this.autoPilot = false;
+        } else {
+            this.autoPilot = true;
+            var ang = this.angle + this.scene.pi_2;
+            this.x_centre = this.x_pos + 5*Math.sin(ang);
+            this.z_centre = this.z_pos + 5*Math.cos(ang);
+        }
     }
 
     update(t, elapsed) {
@@ -178,7 +183,7 @@ class MyVehicle extends CGFobject {
 
     reset() {
         this.x_pos = 0;
-        this.y_pos = 0;
+        this.y_pos = 10;
         this.z_pos = 0;
         this.angle = 0;
         this.speed = 0;

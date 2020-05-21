@@ -113,15 +113,14 @@ class MyScene extends CGFscene {
             this.supplyID = 0;
             keysPressed = true;
         }
-        if (this.gui.isKeyPressed("KeyP")) {
+        if (this.gui.isKeyPressed("KeyP") && this.cooldown == 0) {
             text += " P ";
-            if (!this.vehicle.autoPilot)
-                this.vehicle.autoPilotToggle();
+            this.cooldown = 15;
+            this.vehicle.autoPilotToggle();
             keysPressed = true;
         }
         if (this.gui.isKeyPressed("KeyL") && this.cooldown == 0) {
             text += " L ";
-            
             this.cooldown = 15;
             if (this.supplyID < this.supplies.length) {
                 this.supplies[this.supplyID].drop(this.vehicle.x_pos, this.vehicle.z_pos);
@@ -175,13 +174,10 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         
-        this.pushMatrix();
-        this.translate(0, 10, 0);
-        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.vehicle.display();
-        this.popMatrix();
 
         this.terrain.display();
+
         for (var i = 0; i < this.supplyID; i++) {
             this.supplies[i].display();
         }
